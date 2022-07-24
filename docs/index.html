@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script src="vendor/chart.min.js"></script>
+	<script src="vendor/chartjs-plugin-annotation.min.js"></script>
+</head>
+<body>
+	<main>
+		<canvas id="chart" width="1200" height="800"></canvas>
+	</main>
+	<script type="text/javascript">
+		const ctx = document.getElementById("chart");
+		const chart = new Chart(ctx, {
+			data: {
+				datasets: [{
+					type: 'line',
+					label: '簡訊數（從傳送總數推估）',
+					borderColor: '#5087ec',
+					data: [],
+					yAxisID: 'ySMS',
+					stepped: 'before'
+				}, {
+					type: 'line',
+					label: '簡訊數（從刪除總數推估）',
+					borderColor: '#a9c2ef',
+					data: [],
+					yAxisID: 'ySMS',
+					stepped: 'before'
+				}, {
+					type: 'line',
+					label: '調閱數',
+					borderColor: '#5087ec',
+					data: [],
+					yAxisID: 'yReq'
+				}, {
+					type: 'line',
+					label: '新增本土確診數',
+					borderColor: '#d95040',
+					data: [],
+					yAxisID: 'yCase',
+				}, {
+					type: 'line',
+					label: '總送驗數',
+					borderColor: '#f2bd42',
+					data: [],
+					yAxisID: 'yTest'
+				}, {
+					type: 'line',
+					label: '零售店與休閒設施',
+					borderColor: '#f2bd42',
+					data: [],
+					yAxisID: 'yMobility',
+				}, {
+					type: 'line',
+					label: '雜貨店和藥局',
+					borderColor: '#58a45c',
+					data: [],
+					yAxisID: 'yMobility',
+				}, {
+					type: 'line',
+					label: '大眾運輸',
+					borderColor: '#ee752f',
+					data: [],
+					yAxisID: 'yMobility',
+				}, {
+					type: 'line',
+					label: '工作場所',
+					borderColor: '#68bbc4',
+					data: [],
+					yAxisID: 'yMobility',
+				}],
+				labels: []
+			},
+			options: {
+				plugins: {
+					title: {
+						display: true,
+						text: '1922 簡訊實聯制使用趨勢（對照疫情與人流）'
+					},
+					subtitle: {
+						display: true,
+						text: '資料來源：衛生福利部疾病管制署、Google 社區人流報告'
+					}
+				},
+				scales: {
+					x: {
+						type: 'time',
+						time: {
+							unit: 'day'
+						}
+					},
+					ySMS: {
+						beginAtZero: true,
+						title: {
+							display: true,
+							text: '簡訊數量（則，M = 百萬）'
+						}
+					},
+					yReq: {
+						beginAtZero: true,
+						title: {
+							display: true,
+							text: '調閱數（筆，K = 千）'
+						}
+					},
+					yCase: {
+						beginAtZero: true,
+						title: {
+							display: true,
+							text: '確診人數（人）'
+						}
+					},
+					yTest: {
+						beginAtZero: true,
+						title: {
+							display: true,
+							text: '送驗數（件，K = 千）'
+						}
+					},
+					yMobility: {
+						title: {
+							display: true,
+							text: '人流與全球疫情爆發前相較之增減（%）'
+						}
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

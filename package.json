@@ -1,0 +1,20 @@
+{
+  "name": "sms-registration-chart",
+  "version": "0.9.0",
+  "description": "Chart representation of SMS Registration System data",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rschiang/sms-registration-chart.git"
+  },
+  "keywords": [
+    "1922",
+    "covid19-data",
+    "sms-registration"
+  ],
+  "author": "Poren Chiang",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^3.8.0",
+    "chartjs-plugin-annotation": "^1.4.0"
+  }
+}
