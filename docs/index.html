@@ -41,7 +41,7 @@
 					type: 'line',
 					label: '新增本土確診數',
 					borderColor: '#d95040',
-					data: [],
+					data: dataEnv,
 					yAxisID: 'yCase',
 					parsing: {
 						yAxisKey: 'cl'
@@ -131,14 +131,15 @@
 						min: '2021-05-19',
 						max: '2022-05-26',
 						time: {
-							unit: 'day'
+							tooltipFormat: 'PPP',
+							unit: 'month'
 						},
 						ticks: {
-							align: 'inner',
+							align: 'start',
 							maxTicksLimit: 15
 						}
 					},
-					/*ySMS: {
+					ySMS: {
 						beginAtZero: true,
 						title: {
 							display: true,
@@ -147,33 +148,46 @@
 					},
 					yReq: {
 						beginAtZero: true,
+						position: 'right',
 						title: {
 							display: true,
 							text: '調閱數（筆，K = 千）'
 						}
-					},*/
+					},
 					yCase: {
-						position: 'right',
 						beginAtZero: true,
+						max: 1000,
+						position: 'right',
 						title: {
 							display: true,
 							text: '確診人數（人）'
+						},
+						grid: {
+							display: false
 						}
 					},
 					yTest: {
 						beginAtZero: true,
+						suggestedMax: 240000,
+						position: 'right',
 						title: {
 							display: true,
 							text: '送驗數（件，K = 千）'
 						}
 					},
 					yMobility: {
-						position: 'right',
 						suggestedMax: 200,
 						suggestedMin: -100,
+						position: 'right',
 						title: {
 							display: true,
 							text: '人流與全球疫情爆發前相較之增減（%）'
+						},
+						grid: {
+							display: false
+						},
+						ticks: {
+							callback: (v) => `${v}%`
 						}
 					}
 				}
