@@ -5,17 +5,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<script src="vendor/chart.min.js"></script>
+	<script src="vendor/chartjs-adapter-date-fns.bundle.min.js"></script>
 	<script src="vendor/chartjs-plugin-annotation.min.js"></script>
 </head>
 <body>
 	<main>
-		<canvas id="chart" width="1200" height="800"></canvas>
+		<canvas id="chart" width="1200" height="640"></canvas>
 	</main>
+	<script src="data/env.js"></script>
 	<script type="text/javascript">
 		const ctx = document.getElementById("chart");
 		const chart = new Chart(ctx, {
 			data: {
-				datasets: [{
+				datasets: [/*{
 					type: 'line',
 					label: '簡訊數（從傳送總數推估）',
 					borderColor: '#5087ec',
@@ -35,46 +37,84 @@
 					borderColor: '#5087ec',
 					data: [],
 					yAxisID: 'yReq'
-				}, {
+				}, */{
 					type: 'line',
 					label: '新增本土確診數',
 					borderColor: '#d95040',
 					data: [],
 					yAxisID: 'yCase',
+					parsing: {
+						yAxisKey: 'cl'
+					}
 				}, {
 					type: 'line',
 					label: '總送驗數',
 					borderColor: '#f2bd42',
-					data: [],
-					yAxisID: 'yTest'
+					data: dataEnv,
+					yAxisID: 'yTest',
+					parsing: {
+						yAxisKey: 't'
+					}
 				}, {
 					type: 'line',
 					label: '零售店與休閒設施',
 					borderColor: '#f2bd42',
-					data: [],
+					borderDash: [1.25, 1.25],
+					borderWidth: 1.25,
+					data: dataEnv,
 					yAxisID: 'yMobility',
+					parsing: {
+						yAxisKey: 'mr'
+					}
 				}, {
 					type: 'line',
 					label: '雜貨店和藥局',
 					borderColor: '#58a45c',
-					data: [],
+					borderDash: [1.25, 1.25],
+					borderWidth: 1.25,
+					data: dataEnv,
 					yAxisID: 'yMobility',
+					parsing: {
+						yAxisKey: 'mg'
+					}
 				}, {
 					type: 'line',
 					label: '大眾運輸',
 					borderColor: '#ee752f',
-					data: [],
+					borderDash: [1.25, 1.25],
+					borderWidth: 1.25,
+					data: dataEnv,
 					yAxisID: 'yMobility',
+					parsing: {
+						yAxisKey: 'mt'
+					}
 				}, {
 					type: 'line',
 					label: '工作場所',
 					borderColor: '#68bbc4',
-					data: [],
+					borderDash: [1.25, 1.25],
+					borderWidth: 1.25,
+					data: dataEnv,
 					yAxisID: 'yMobility',
+					parsing: {
+						yAxisKey: 'mw'
+					}
 				}],
 				labels: []
 			},
 			options: {
+				elements: {
+					line: {
+						borderJoinStyle: 'round'
+					},
+					point: {
+						pointRadius: 0,
+						pointHitRadius: 4
+					}
+				},
+				interaction: {
+					mode: 'index'
+				},
 				plugins: {
 					title: {
 						display: true,
@@ -88,11 +128,17 @@
 				scales: {
 					x: {
 						type: 'time',
+						min: '2021-05-19',
+						max: '2022-05-26',
 						time: {
 							unit: 'day'
+						},
+						ticks: {
+							align: 'inner',
+							maxTicksLimit: 15
 						}
 					},
-					ySMS: {
+					/*ySMS: {
 						beginAtZero: true,
 						title: {
 							display: true,
@@ -105,8 +151,9 @@
 							display: true,
 							text: '調閱數（筆，K = 千）'
 						}
-					},
+					},*/
 					yCase: {
+						position: 'right',
 						beginAtZero: true,
 						title: {
 							display: true,
@@ -121,6 +168,9 @@
 						}
 					},
 					yMobility: {
+						position: 'right',
+						suggestedMax: 200,
+						suggestedMin: -100,
 						title: {
 							display: true,
 							text: '人流與全球疫情爆發前相較之增減（%）'
