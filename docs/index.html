@@ -24,6 +24,7 @@
 					type: 'line',
 					label: '簡訊數（從 NCC 傳送總數推估）',
 					borderColor: '#5087ec',
+					backgroundColor: '#5087ec',
 					data: dataNCC.SENT,
 					yAxisID: 'ySMS',
 					stepped: 'after',
@@ -34,6 +35,7 @@
 					type: 'line',
 					label: '簡訊數（從 NCC 刪除總數推估）',
 					borderColor: '#a9c2ef',
+					backgroundColor: '#a9c2ef',
 					data: dataNCC.DELETED,
 					yAxisID: 'ySMS',
 					stepped: 'after',
@@ -42,8 +44,9 @@
 					}
 				}, {
 					type: 'line',
-					label: '簡訊數（從刪除總數推估）',
+					label: '簡訊數（從 1922 刪除總數推估）',
 					borderColor: '#5087ec',
+					backgroundColor: '#5087ec',
 					data: dataCDC,
 					yAxisID: 'ySMS',
 					parsing: {
@@ -53,6 +56,7 @@
 					type: 'line',
 					label: '調閱數',
 					borderColor: '#5087ec',
+					backgroundColor: '#5087ec',
 					data: dataCDC,
 					yAxisID: 'yReq',
 					parsing: {
@@ -60,8 +64,9 @@
 					}
 				}, {
 					type: 'line',
-					label: '新增本土確診數',
+					label: '新增確診數（本土）',
 					borderColor: '#d95040',
+					backgroundColor: '#d95040',
 					data: dataEnv,
 					yAxisID: 'yCase',
 					parsing: {
@@ -71,6 +76,7 @@
 					type: 'line',
 					label: '總送驗數',
 					borderColor: '#f2bd42',
+					backgroundColor: '#f2bd42',
 					data: dataEnv,
 					yAxisID: 'yTest',
 					parsing: {
@@ -79,6 +85,7 @@
 				}, {
 					type: 'line',
 					label: '零售店與休閒設施',
+					unit: '%',
 					borderColor: '#f2bd42',
 					borderDash: [1.25, 1.25],
 					borderWidth: 1.25,
@@ -90,6 +97,7 @@
 				}, {
 					type: 'line',
 					label: '雜貨店和藥局',
+					unit: '%',
 					borderColor: '#58a45c',
 					borderDash: [1.25, 1.25],
 					borderWidth: 1.25,
@@ -101,6 +109,7 @@
 				}, {
 					type: 'line',
 					label: '大眾運輸',
+					unit: '%',
 					borderColor: '#ee752f',
 					borderDash: [1.25, 1.25],
 					borderWidth: 1.25,
@@ -112,6 +121,7 @@
 				}, {
 					type: 'line',
 					label: '工作場所',
+					unit: '%',
 					borderColor: '#68bbc4',
 					borderDash: [1.25, 1.25],
 					borderWidth: 1.25,
@@ -130,30 +140,68 @@
 					},
 					point: {
 						pointRadius: 0,
-						pointHitRadius: 4
+						pointHitRadius: 4,
+						pointHoverBackgroundColor: 'rgba(0,0,0,.1)'
 					}
 				},
 				interaction: {
 					mode: 'nearest',
 					axis: 'x',
+					includeInvisible: true,
 					intersect: false
+				},
+				layout: {
+					padding: {
+						left: 16
+					}
 				},
 				plugins: {
 					title: {
 						display: true,
+						align: 'start',
 						text: '1922 簡訊實聯制使用趨勢（對照疫情與人流）',
+						color: '#757575',
 						font: {
-							size: 16
+							size: 18,
+							weight: '500',
+							family: 'Roboto, system-ui, sans-serif'
+						},
+						padding: {
+							top: 12,
+							bottom: 4
 						}
 					},
 					subtitle: {
 						display: true,
-						text: '資料來源：衛生福利部疾病管制署、Google 社區人流報告'
+						align: 'start',
+						text: '資料來源：衛生福利部疾病管制署、Google 社區人流報告',
+						color: '#999',
+						font: {
+							size: 14
+						},
+						padding: {
+							bottom: 8
+						}
 					},
 					legend: {
 						labels: {
 							boxWidth: 16,
 							boxHeight: 0
+						}
+					},
+					tooltip: {
+						position: 'nearest',
+						backgroundColor: '#fff',
+						borderColor: 'rgba(0,0,0,.25)',
+						borderWidth: 1,
+						titleColor: '#808080',
+						bodyColor: '#808080',
+						boxWidth: 10,
+						boxHeight: 10,
+						boxPadding: 5,
+						padding: 10,
+						callbacks: {
+							label: (context) => `${context.dataset.label || ''}: ${context.parsed.y !== null ? context.formattedValue : 'N/A'}${context.dataset.unit || ''}`
 						}
 					},
 					crosshair: {
@@ -191,7 +239,6 @@
 					},
 					yReq: {
 						beginAtZero: true,
-						position: 'right',
 						display: 'auto',
 						title: {
 							display: true,
@@ -221,6 +268,9 @@
 						title: {
 							display: true,
 							text: '送驗數（件，K = 千）'
+						},
+						grid: {
+							display: false
 						},
 						ticks: {
 							callback: (v) => `${Math.round(v/1000)}K`
