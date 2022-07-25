@@ -12,32 +12,52 @@
 	<main>
 		<canvas id="chart" width="1200" height="640"></canvas>
 	</main>
+	<script src="data/ncc.js"></script>
+	<script src="data/cdc.js"></script>
 	<script src="data/env.js"></script>
 	<script type="text/javascript">
 		const ctx = document.getElementById("chart");
 		const chart = new Chart(ctx, {
 			data: {
-				datasets: [/*{
+				datasets: [{
 					type: 'line',
-					label: '簡訊數（從傳送總數推估）',
+					label: '簡訊數（從 NCC 傳送總數推估）',
 					borderColor: '#5087ec',
-					data: [],
+					data: dataNCC.SENT,
 					yAxisID: 'ySMS',
-					stepped: 'before'
+					stepped: 'after',
+					parsing: {
+						yAxisKey: 'ns'
+					}
+				}, {
+					type: 'line',
+					label: '簡訊數（從 NCC 刪除總數推估）',
+					borderColor: '#a9c2ef',
+					data: dataNCC.DELETED,
+					yAxisID: 'ySMS',
+					stepped: 'after',
+					parsing: {
+						yAxisKey: 'nd'
+					}
 				}, {
 					type: 'line',
 					label: '簡訊數（從刪除總數推估）',
-					borderColor: '#a9c2ef',
-					data: [],
+					borderColor: '#5087ec',
+					data: dataCDC,
 					yAxisID: 'ySMS',
-					stepped: 'before'
+					parsing: {
+						yAxisKey: 'cd'
+					}
 				}, {
 					type: 'line',
 					label: '調閱數',
 					borderColor: '#5087ec',
-					data: [],
-					yAxisID: 'yReq'
-				}, */{
+					data: dataCDC,
+					yAxisID: 'yReq',
+					parsing: {
+						yAxisKey: 'cr'
+					}
+				}, {
 					type: 'line',
 					label: '新增本土確診數',
 					borderColor: '#d95040',
@@ -144,6 +164,9 @@
 						title: {
 							display: true,
 							text: '簡訊數量（則，M = 百萬）'
+						},
+						ticks: {
+							callback: (v) => `${Math.round(v/1000000)}M`
 						}
 					},
 					yReq: {
@@ -152,6 +175,9 @@
 						title: {
 							display: true,
 							text: '調閱數（筆，K = 千）'
+						},
+						ticks: {
+							callback: (v) => `${Math.round(v/1000)}K`
 						}
 					},
 					yCase: {
@@ -173,6 +199,9 @@
 						title: {
 							display: true,
 							text: '送驗數（件，K = 千）'
+						},
+						ticks: {
+							callback: (v) => `${Math.round(v/1000)}K`
 						}
 					},
 					yMobility: {
