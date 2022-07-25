@@ -7,6 +7,7 @@
 	<script src="vendor/chart.min.js"></script>
 	<script src="vendor/chartjs-adapter-date-fns.bundle.min.js"></script>
 	<script src="vendor/chartjs-plugin-annotation.min.js"></script>
+	<script src="vendor/chartjs-plugin-crosshair.min.js"></script>
 </head>
 <body>
 	<main>
@@ -119,10 +120,10 @@
 					parsing: {
 						yAxisKey: 'mw'
 					}
-				}],
-				labels: []
+				}]
 			},
 			options: {
+				normalized: true,
 				elements: {
 					line: {
 						borderJoinStyle: 'round'
@@ -133,16 +134,35 @@
 					}
 				},
 				interaction: {
-					mode: 'index'
+					mode: 'nearest',
+					axis: 'x',
+					intersect: false
 				},
 				plugins: {
 					title: {
 						display: true,
-						text: '1922 簡訊實聯制使用趨勢（對照疫情與人流）'
+						text: '1922 簡訊實聯制使用趨勢（對照疫情與人流）',
+						font: {
+							size: 16
+						}
 					},
 					subtitle: {
 						display: true,
 						text: '資料來源：衛生福利部疾病管制署、Google 社區人流報告'
+					},
+					legend: {
+						labels: {
+							boxWidth: 16,
+							boxHeight: 0
+						}
+					},
+					crosshair: {
+						line: {
+							color: 'rgba(127,127,127,.2)'
+						},
+						snapping: {
+							enabled: true
+						}
 					}
 				},
 				scales: {
@@ -172,6 +192,7 @@
 					yReq: {
 						beginAtZero: true,
 						position: 'right',
+						display: 'auto',
 						title: {
 							display: true,
 							text: '調閱數（筆，K = 千）'
@@ -196,6 +217,7 @@
 						beginAtZero: true,
 						suggestedMax: 240000,
 						position: 'right',
+						display: 'auto',
 						title: {
 							display: true,
 							text: '送驗數（件，K = 千）'
@@ -208,6 +230,7 @@
 						suggestedMax: 200,
 						suggestedMin: -100,
 						position: 'right',
+						display: 'auto',
 						title: {
 							display: true,
 							text: '人流與全球疫情爆發前相較之增減（%）'
