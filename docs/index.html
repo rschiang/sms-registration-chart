@@ -8,11 +8,71 @@
 	<script src="vendor/chartjs-adapter-date-fns.bundle.min.js"></script>
 	<script src="vendor/chartjs-plugin-annotation.min.js"></script>
 	<script src="vendor/chartjs-plugin-crosshair.min.js"></script>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		html, body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+
+		main {
+			position: relative;
+			height: calc(90vh - 3rem);
+			width: 100vw;
+		}
+
+		nav {
+			display: flex;
+			height: 3rem;
+			flex-flow: row wrap;
+			padding: .5rem;
+		}
+
+		nav button {
+			flex: 1;
+			background-color: rgba(0, 0, 0, 0);
+			border: none;
+			cursor: pointer;
+			transition: background-color ease .28s;
+		}
+
+		nav button:hover {
+			background-color: rgba(0, 0, 0, .12);
+		}
+
+		nav button:active {
+			background-color: rgba(0, 0, 0, .25);
+		}
+
+		footer {
+			background: url('images/iias-logo.png') right center / contain no-repeat;
+			height: 10vh;
+			padding: 1em 2em;
+			font-size: 0.85rem;
+			color: #999;
+		}
+	</style>
 </head>
 <body>
 	<main>
-		<canvas id="chart" width="1200" height="640"></canvas>
+		<canvas id="chart" width="1200" height="800"></canvas>
 	</main>
+	<nav>
+		<button>圖一：疫情與人流 (NCC)</button>
+		<button>圖二：疫情與人流 (1922)</button>
+		<button>圖三：資料來源比較</button>
+		<button>圖四：調閱數變化</button>
+		<button>圖五：新台灣模式</button>
+		<button>顯示所有資料</button>
+		<button id="resetZoomButton" hidden>重設縮放</button>
+	</nav>
+	<footer>
+		© 2022 Poren Chiang
+	</footer>
 	<script src="data/ncc.js"></script>
 	<script src="data/cdc.js"></script>
 	<script src="data/env.js"></script>
@@ -134,6 +194,8 @@
 			},
 			options: {
 				normalized: true,
+				responsive: true,
+				maintainAspectRatio: false,
 				elements: {
 					line: {
 						borderJoinStyle: 'round'
@@ -205,11 +267,15 @@
 						}
 					},
 					crosshair: {
+						button: document.getElementById('resetZoomButton'),
 						line: {
 							color: 'rgba(127,127,127,.2)'
 						},
 						snapping: {
 							enabled: true
+						},
+						zoom: {
+							enabled: false
 						}
 					}
 				},
