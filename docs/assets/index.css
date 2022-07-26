@@ -23,6 +23,7 @@ nav {
 
 nav button {
     flex: 1;
+    color:  #212121;
     background-color: rgba(0, 0, 0, 0);
     border: none;
     cursor: pointer;
@@ -43,6 +44,18 @@ footer {
     padding-right: calc(10vh + 6rem);
     font-size: 0.85rem;
     color: #999;
+}
+
+footer a, footer a:visited {
+    color: #999;
+}
+
+footer a:hover {
+    color: #757575;
+}
+
+footer a:active {
+    color: #606060;
 }
 
 footer > div {
