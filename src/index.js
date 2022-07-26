@@ -11,6 +11,7 @@ import datasets from './datasets';
 import scales from './scales';
 import views from './views';
 import annotations from './annotations';
+import konamiBind from './konami';
 
 const ctx = document.getElementById("chart");
 const chart = new Chart(ctx, {
@@ -151,13 +152,16 @@ const transitToView = (viewId) => {
 document.querySelectorAll('button[data-view-id]').forEach((i) =>
   i.addEventListener('click', (e) => transitToView(e.target.dataset.viewId)));
 
-document.getElementById('snapshotButton').addEventListener('click', () => {
+konamiBind(document.body, () => {
   chart.options.responsive = false;
   chart.options.maintainAspectRatio = false;
   chart.options.devicePixelRatio = 3;
   chart.options.plugins.legend.labels.filter = ((li, data) => !li.hidden);
   chart.resize(1280, 800);
+  document.getElementById('snapshotButton').removeAttribute('hidden');
+})
 
+document.getElementById('snapshotButton').addEventListener('click', () => {
   let blob = chart.toBase64Image();
   const el = document.getElementById('snapshot');
   el.href = blob;
