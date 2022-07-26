@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+main {
+    position: relative;
+    height: calc(95vh - 3rem);
+    width: 100vw;
+}
+
+nav {
+    display: flex;
+    height: 3rem;
+    flex-flow: row wrap;
+    padding: .5rem 0;
+}
+
+nav button {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+    transition: background-color ease .28s;
+}
+
+nav button:hover {
+    background-color: rgba(0, 0, 0, .12);
+}
+
+nav button:active {
+    background-color: rgba(0, 0, 0, .25);
+}
+
+footer {
+    background: url('iias-logo.png') right center / contain no-repeat;
+    height: calc(5vh + 3rem);
+    padding-right: calc(10vh + 6rem);
+    font-size: 0.85rem;
+    color: #999;
+}
+
+footer > div {
+    padding: .5rem 0 .5rem 2em;
+}
