@@ -2,6 +2,7 @@ import { Chart, LineElement, PointElement, LineController, LinearScale, TimeScal
 import annotationPlugin from 'chartjs-plugin-annotation';
 import { CrosshairPlugin } from 'chartjs-plugin-crosshair';
 import 'chartjs-adapter-date-fns';
+import { zhTW } from 'date-fns/locale';
 
 Chart.register(LineElement, PointElement, LineController, LinearScale, TimeScale, Legend, Title, Tooltip, SubTitle);
 Chart.register(CrosshairPlugin);
@@ -219,6 +220,11 @@ const chart = new Chart(ctx, {
         type: 'time',
         min: '2021-05-19',
         max: '2022-05-26',
+        adapters: {
+          date: {
+            locale: zhTW
+          }
+        },
         time: {
           tooltipFormat: 'PPP',
           unit: 'month'
