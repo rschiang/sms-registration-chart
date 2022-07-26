@@ -9,7 +9,7 @@ Chart.register(annotationPlugin);
 
 import datasets from './datasets';
 import scales from './scales';
-import dataNCC from '../data/ncc.json';
+import views from './views';
 
 const ctx = document.getElementById("chart");
 const chart = new Chart(ctx, {
@@ -108,58 +108,26 @@ const chart = new Chart(ctx, {
   }
 });
 
-document.getElementById('nccViewButton').addEventListener('click', () => {
-  for (let i = 0; i < chart.data.datasets.length; i++)
-     chart.setDatasetVisibility(i, (i !== 2 && i !== 3 && i !== 5));
-  chart.data.datasets[1].data = dataNCC.DELETED.slice(0, 7);
-  chart.options.scales.x.min = new Date(2021, 4, 19);
-  chart.options.scales.x.max = new Date(2022, 0, 22);
-  chart.options.scales.yCase.max = 1000;
-  chart.update();
-});
+let currentViewId = 'default';
+const transitToView = (viewId) => {
+  const current = views[currentViewId];
+  const view = views[viewId];
 
-document.getElementById('cdcViewButton').addEventListener('click', () => {
-  for (let i = 0; i < chart.data.datasets.length; i++)
-     chart.setDatasetVisibility(i, (i >= 2 && i !== 3 && i !== 5));
-  chart.options.scales.x.min = new Date(2021, 9, 20);
-  chart.options.scales.x.max = new Date(2022, 2, 19);
-  chart.options.scales.yCase.max = 300;
-  chart.update();
-});
+  if (current.onLeave) current.onLeave(chart);
 
-document.getElementById('sourceCompareButton').addEventListener('click', () => {
-  for (let i = 0; i < chart.data.datasets.length; i++)
-     chart.setDatasetVisibility(i, (i !== 1 && (i < 3 || i > 5)));
-  chart.options.scales.x.min = new Date(2021, 9, 20);
-  chart.options.scales.x.max = new Date(2022, 0, 22);
-  chart.options.scales.yCase.max = 1000;
-  chart.update();
-});
+  chart.options.scales.x.min = new Date(view.start[0], view.start[1], view.start[2]);
+  chart.options.scales.x.max = new Date(view.end[0], view.end[1], view.end[2]);
+  chart.options.scales.yCase.max = view.maxCase;
 
-document.getElementById('reqViewButton').addEventListener('click', () => {
   for (let i = 0; i < chart.data.datasets.length; i++)
-     chart.setDatasetVisibility(i, (i >= 3 && i <= 5));
-  chart.options.scales.x.min = new Date(2021, 10, 16);
-  chart.options.scales.x.max = new Date(2022, 2, 25);
-  chart.options.scales.yCase.max = 1000;
-  chart.update();
-});
+    chart.setDatasetVisibility(i, view.datasets.includes(chart.data.datasets[i].parsing.yAxisKey));
 
-document.getElementById('newNormViewButton').addEventListener('click', () => {
-  for (let i = 0; i < chart.data.datasets.length; i++)
-     chart.setDatasetVisibility(i, (i >= 3 && i <= 5));
-  chart.options.scales.x.min = new Date(2022, 2, 20);
-  chart.options.scales.x.max = new Date(2022, 4, 26);
-  chart.options.scales.yCase.max = 120000;
-  chart.update();
-});
+  currentViewId = viewId;
+  if (view.onEnter) view.onEnter(chart);
 
-document.getElementById('showAllButton').addEventListener('click', () => {
-  for (let i = 0; i < chart.data.datasets.length; i++)
-     chart.setDatasetVisibility(i, true);
-  chart.data.datasets[1].data = dataNCC.DELETED;
-  chart.options.scales.x.min = new Date(2021, 4, 19);
-  chart.options.scales.x.max = new Date(2022, 4, 26);
-  chart.options.scales.yCase.max = 1000;
   chart.update();
-});
+};
+
+document.querySelectorAll('button[data-view-id]').forEach((i) =>
+  i.addEventListener('click', (e) => transitToView(e.target.dataset.viewId)));
+
