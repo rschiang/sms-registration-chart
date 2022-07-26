@@ -26,6 +26,9 @@ export default {
     ticks: {
       align: 'start',
       maxTicksLimit: 15
+    },
+    grid: {
+      display: false
     }
   },
   ySMS: {
