@@ -132,8 +132,15 @@ const transitToView = (viewId) => {
   chart.options.scales.x.max = new Date(view.end[0], view.end[1] - 1, view.end[2]);
   chart.options.scales.yCase.max = view.maxCase;
 
-  for (let i = 0; i < chart.data.datasets.length; i++)
-    chart.setDatasetVisibility(i, view.datasets.includes(chart.data.datasets[i].parsing.yAxisKey));
+  for (let i = 0; i < chart.data.datasets.length; i++) {
+    const datasetKey = chart.data.datasets[i].parsing.yAxisKey;
+
+    chart.setDatasetVisibility(i, view.datasets.includes(datasetKey));
+    if (view.embolden.includes(datasetKey))
+      chart.data.datasets[i].borderWidth = 3.75;
+    else if (current.embolden.includes(datasetKey))
+      chart.data.datasets[i].borderWidth = undefined;
+  }
 
   currentViewId = viewId;
   if (view.onEnter) view.onEnter(chart);
