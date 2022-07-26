@@ -6,6 +6,10 @@ import 'chartjs-adapter-date-fns';
 Chart.register(CrosshairPlugin);
 Chart.register(annotationPlugin);
 
+import dataNCC from '../data/ncc.json';
+import dataCDC from '../data/cdc.json';
+import dataEnv from '../data/env.json';
+
 const ctx = document.getElementById("chart");
 const chart = new Chart(ctx, {
   data: {
