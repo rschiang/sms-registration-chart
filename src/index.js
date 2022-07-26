@@ -115,8 +115,8 @@ const transitToView = (viewId) => {
 
   if (current.onLeave) current.onLeave(chart);
 
-  chart.options.scales.x.min = new Date(view.start[0], view.start[1], view.start[2]);
-  chart.options.scales.x.max = new Date(view.end[0], view.end[1], view.end[2]);
+  chart.options.scales.x.min = new Date(view.start[0], view.start[1] - 1, view.start[2]);
+  chart.options.scales.x.max = new Date(view.end[0], view.end[1] - 1, view.end[2]);
   chart.options.scales.yCase.max = view.maxCase;
 
   for (let i = 0; i < chart.data.datasets.length; i++)

@@ -31,7 +31,7 @@ export default {
   },
   newNorm: {
     datasets: ['cr', 'cl', 't'],
-    start: [2021, 3, 20],
+    start: [2022, 3, 20],
     end: [2022, 5, 26],
     maxCase: 120000,
   },
@@ -39,6 +39,6 @@ export default {
     datasets: ['ns', 'nd', 'cd', 'cr', 'cl', 't', 'mr', 'mg', 'mt', 'mw'],
     start: [2021, 5, 19],
     end: [2022, 5, 26],
-    maxCase: 1000,
+    maxCase: 2000,
   },
 };
