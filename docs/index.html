@@ -214,14 +214,14 @@
 				},
 				layout: {
 					padding: {
-						left: 16
+						left: 16, right: 8
 					}
 				},
 				plugins: {
 					title: {
 						display: true,
 						align: 'start',
-						text: '1922 簡訊實聯制使用趨勢（對照疫情與人流）',
+						text: '1922 簡訊實聯制使用趨勢',
 						color: '#757575',
 						font: {
 							size: 18,
@@ -229,14 +229,14 @@
 							family: 'Roboto, system-ui, sans-serif'
 						},
 						padding: {
-							top: 12,
+							top: 14,
 							bottom: 4
 						}
 					},
 					subtitle: {
 						display: true,
 						align: 'start',
-						text: '資料來源：衛生福利部疾病管制署、Google 社區人流報告',
+						text: '資料來源：衛生福利部疾病管制署、國家通訊傳播委員會、Google 社區人流報告',
 						color: '#999',
 						font: {
 							size: 14
@@ -248,7 +248,8 @@
 					legend: {
 						labels: {
 							boxWidth: 16,
-							boxHeight: 0
+							boxHeight: 0,
+							padding: 8
 						}
 					},
 					tooltip: {
@@ -295,6 +296,7 @@
 					},
 					ySMS: {
 						beginAtZero: true,
+						display: 'auto',
 						title: {
 							display: true,
 							text: '簡訊數量（則，M = 百萬）'
@@ -311,14 +313,15 @@
 							text: '調閱數（筆，K = 千）'
 						},
 						ticks: {
-							callback: (v) => `${Math.round(v/1000)}K`
+							callback: (v) => v >= 1000000 ? `${v/1000000}M` : `${Math.round(v/1000)}K`
 						}
 					},
 					yCase: {
 						type: 'linear',
 						beginAtZero: true,
-						max: 1000,
+						max: 2000,
 						position: 'right',
+						display: 'auto',
 						title: {
 							display: true,
 							text: '確診人數（人）'
@@ -340,7 +343,7 @@
 							display: false
 						},
 						ticks: {
-							callback: (v) => `${Math.round(v/1000)}K`
+							callback: (v) => `${v/1000}K`
 						}
 					},
 					yMobility: {
@@ -367,6 +370,7 @@
 			for (let i = 0; i < chart.data.datasets.length; i++)
 				chart.data.datasets[i].hidden = (i === 2 || i === 3 || i === 5);
 			chart.data.datasets[1].data = dataNCC.DELETED.slice(0, 7);
+			chart.options.scales.x.min = new Date(2021, 4, 19);
 			chart.options.scales.x.max = new Date(2022, 0, 22);
 			chart.options.scales.yCase.max = 1000;
 			chart.update();
