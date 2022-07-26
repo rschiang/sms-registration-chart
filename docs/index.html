@@ -62,12 +62,12 @@
 		<canvas id="chart" width="1200" height="800"></canvas>
 	</main>
 	<nav>
-		<button>圖一：疫情與人流 (NCC)</button>
-		<button>圖二：疫情與人流 (1922)</button>
-		<button>圖三：資料來源比較</button>
-		<button>圖四：調閱數變化</button>
-		<button>圖五：新台灣模式</button>
-		<button>顯示所有資料</button>
+		<button id="nccViewButton">圖一：疫情與人流 (NCC)</button>
+		<button id="cdcViewButton">圖二：疫情與人流 (1922)</button>
+		<button id="sourceCompareButton">圖三：資料來源比較</button>
+		<button id="reqViewButton">圖四：調閱數變化</button>
+		<button id="newNormViewButton">圖五：新台灣模式</button>
+		<button id="showAllButton">顯示所有資料</button>
 		<button id="resetZoomButton" hidden>重設縮放</button>
 	</nav>
 	<footer>
@@ -115,8 +115,8 @@
 				}, {
 					type: 'line',
 					label: '調閱數',
-					borderColor: '#5087ec',
-					backgroundColor: '#5087ec',
+					borderColor: '#356dd3',
+					backgroundColor: '#356dd3',
 					data: dataCDC,
 					yAxisID: 'yReq',
 					parsing: {
@@ -315,6 +315,7 @@
 						}
 					},
 					yCase: {
+						type: 'linear',
 						beginAtZero: true,
 						max: 1000,
 						position: 'right',
@@ -360,6 +361,61 @@
 					}
 				}
 			}
+		});
+
+		document.getElementById('nccViewButton').addEventListener('click', () => {
+			for (let i = 0; i < chart.data.datasets.length; i++)
+				chart.data.datasets[i].hidden = (i === 2 || i === 3 || i === 5);
+			chart.data.datasets[1].data = dataNCC.DELETED.slice(0, 7);
+			chart.options.scales.x.max = new Date(2022, 0, 22);
+			chart.options.scales.yCase.max = 1000;
+			chart.update();
+		});
+
+		document.getElementById('cdcViewButton').addEventListener('click', () => {
+			for (let i = 0; i < chart.data.datasets.length; i++)
+				chart.data.datasets[i].hidden = (i <= 1 || i === 3 || i === 5);
+			chart.options.scales.x.min = new Date(2021, 9, 20);
+			chart.options.scales.x.max = new Date(2022, 2, 19);
+			chart.options.scales.yCase.max = 300;
+			chart.update();
+		});
+
+		document.getElementById('sourceCompareButton').addEventListener('click', () => {
+			for (let i = 0; i < chart.data.datasets.length; i++)
+				chart.data.datasets[i].hidden = (i === 1 || (i >= 3 && i <= 5));
+			chart.options.scales.x.min = new Date(2021, 9, 20);
+			chart.options.scales.x.max = new Date(2022, 0, 22);
+			chart.options.scales.yCase.max = 1000;
+			chart.update();
+		});
+
+		document.getElementById('reqViewButton').addEventListener('click', () => {
+			for (let i = 0; i < chart.data.datasets.length; i++)
+				chart.data.datasets[i].hidden = (i < 3 || i > 5);
+			chart.options.scales.x.min = new Date(2021, 10, 16);
+			chart.options.scales.x.max = new Date(2022, 2, 25);
+			chart.options.scales.yCase.max = 1000;
+			chart.update();
+		});
+
+		document.getElementById('newNormViewButton').addEventListener('click', () => {
+			for (let i = 0; i < chart.data.datasets.length; i++)
+				chart.data.datasets[i].hidden = (i < 3 || i > 5);
+			chart.options.scales.x.min = new Date(2022, 2, 20);
+			chart.options.scales.x.max = new Date(2022, 4, 26);
+			chart.options.scales.yCase.max = 120000;
+			chart.update();
+		});
+
+		document.getElementById('showAllButton').addEventListener('click', () => {
+			for (let i = 0; i < chart.data.datasets.length; i++)
+				chart.data.datasets[i].hidden = false;
+			chart.data.datasets[1].data = dataNCC.DELETED;
+			chart.options.scales.x.min = new Date(2021, 4, 19);
+			chart.options.scales.x.max = new Date(2022, 4, 26);
+			chart.options.scales.yCase.max = 1000;
+			chart.update();
 		});
 	</script>
 </body>
