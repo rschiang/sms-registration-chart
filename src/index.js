@@ -10,6 +10,7 @@ Chart.register(annotationPlugin);
 import datasets from './datasets';
 import scales from './scales';
 import views from './views';
+import annotations from './annotations';
 
 const ctx = document.getElementById("chart");
 const chart = new Chart(ctx, {
@@ -102,6 +103,26 @@ const chart = new Chart(ctx, {
         zoom: {
           enabled: false
         }
+      },
+      annotation: {
+        annotations: [{
+          type: 'line',
+          scaleID: 'x',
+          borderWidth: 1,
+          borderColor: 'rgba(0,0,0,.12)',
+          value: '2022-03-07',
+          label: {
+            color: '#757575',
+            backgroundColor: 'transparent',
+            textStrokeColor: '#fff',
+            textStrokeWidth: 3,
+            font: { size: 12, weight: 'normal' },
+            padding: 2,
+            rotation: 270,
+            content: '縮短入境、機組員與密切接觸者隔離天數',
+            enabled: true
+          }
+        }],
       }
     },
     scales: scales,
