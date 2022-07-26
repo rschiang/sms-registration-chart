@@ -18,7 +18,7 @@ export default {
   compare: {
     datasets: ['ns', 'cd', 'mr', 'mg', 'mt', 'mw'],
     start: [2021, 10, 20],
-    end: [2022, 1, 22],
+    end: [2022, 2, 19],
     maxCase: 1000,
     onEnter: (chart) => chart.data.datasets[0].borderColor = '#a9c2ef',
     onLeave: (chart) => chart.data.datasets[0].borderColor = '#5087ec',

@@ -104,10 +104,12 @@ const chart = new Chart(ctx, {
         },
         callbacks: {
           beforeZoom: () => (start, end) => {
-            chart.options.scales.x.min = start;
-            chart.options.scales.x.max = end;
-            chart.update();
-            return false;
+            if ((end - start) >= (5 * 86400 * 1000)) {
+              chart.options.scales.x.min = start;
+              chart.options.scales.x.max = end;
+              chart.update();
+            }
+            return false; // Do not let the crosshair plugin zoom 'cause it messes up the view
           }
         }
       },
