@@ -8,8 +8,10 @@
     "url": "git+https://github.com/rschiang/sms-registration-chart.git"
   },
   "scripts": {
+    "watch": "webpack --watch",
     "build": "webpack"
   },
+  "sideEffects": false,
   "keywords": ["1922", "covid19-data", "sms-registration"],
   "author": "Poren Chiang",
   "license": "ISC",

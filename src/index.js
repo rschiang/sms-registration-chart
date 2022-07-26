@@ -1,8 +1,9 @@
-import Chart from 'chart.js/auto';
+import { Chart, LineElement, PointElement, LineController, LinearScale, TimeScale, Legend, Title, Tooltip, SubTitle } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import { CrosshairPlugin } from 'chartjs-plugin-crosshair';
 import 'chartjs-adapter-date-fns';
 
+Chart.register(LineElement, PointElement, LineController, LinearScale, TimeScale, Legend, Title, Tooltip, SubTitle);
 Chart.register(CrosshairPlugin);
 Chart.register(annotationPlugin);
 
