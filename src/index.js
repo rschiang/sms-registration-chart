@@ -93,7 +93,6 @@ const chart = new Chart(ctx, {
         }
       },
       crosshair: {
-        button: document.getElementById('resetZoomButton'),
         line: {
           color: 'rgba(127,127,127,.2)'
         },
@@ -101,7 +100,15 @@ const chart = new Chart(ctx, {
           enabled: true
         },
         zoom: {
-          enabled: false
+          enabled: true
+        },
+        callbacks: {
+          beforeZoom: () => (start, end) => {
+            chart.options.scales.x.min = start;
+            chart.options.scales.x.max = end;
+            chart.update();
+            return false;
+          }
         }
       },
       annotation: {
