@@ -11,6 +11,7 @@ export default {
     onLeave: (chart) => chart.data.datasets[1].data = dataNCC.DELETED,
   },
   cdc: {
+    subtitle: 'Data source: CDC, Google COVID-19 Community Mobility Reports',
     datasets: ['cd', 'cl', 'mr', 'mg', 'mw'],
     embolden: ['cd'],
     start: [2021, 10, 20],
@@ -27,6 +28,8 @@ export default {
     onLeave: (chart) => chart.data.datasets[0].borderColor = '#5087ec',
   },
   req: {
+    title: 'Daily data requests of SMS-based Contact-Tracing System (SMS-CTS)',
+    subtitle: 'Data source: CDC, sms.1922.gov.tw',
     datasets: ['cr', 'cl', 't'],
     embolden: ['cr'],
     start: [2021, 11, 16],
@@ -34,6 +37,8 @@ export default {
     maxCase: 1000,
   },
   newNorm: {
+    title: 'Daily data requests of SMS-based Contact-Tracing System (SMS-CTS)',
+    subtitle: 'Data source: CDC, sms.1922.gov.tw',
     datasets: ['cr', 'cl', 't'],
     embolden: ['cr'],
     start: [2022, 3, 20],

@@ -129,6 +129,9 @@ const transitToView = (viewId) => {
 
   if (current.onLeave) current.onLeave(chart);
 
+  chart.options.plugins.title.text = view.title || 'Usage trend of SMS-based Contact-Tracing System (SMS-CTS)';
+  chart.options.plugins.subtitle.text = view.subtitle || 'Data source: NCC on Facebook, CDC, Google COVID-19 Community Mobility Reports';
+
   chart.options.scales.x.min = new Date(view.start[0], view.start[1] - 1, view.start[2]);
   chart.options.scales.x.max = new Date(view.end[0], view.end[1] - 1, view.end[2]);
   chart.options.scales.yCase.max = view.maxCase;
