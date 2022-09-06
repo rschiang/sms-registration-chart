@@ -4,7 +4,7 @@ import dataEnv from '../data/env.json';
 
 export default [{
       type: 'line',
-      label: '簡訊數（從 NCC 傳送總數推估）',
+      label: 'SMS sent (via NCC)',
       borderColor: '#5087ec',
       backgroundColor: '#5087ec',
       data: dataNCC.SENT,
@@ -15,7 +15,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '簡訊數（從 NCC 刪除總數推估）',
+      label: 'SMS sent (via NCC)**',
       borderColor: '#a9c2ef',
       backgroundColor: '#a9c2ef',
       data: dataNCC.DELETED,
@@ -26,7 +26,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '簡訊數（從 1922 刪除總數推估）',
+      label: 'SMS sent (via 1922)',
       borderColor: '#5087ec',
       backgroundColor: '#5087ec',
       data: dataCDC,
@@ -36,7 +36,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '調閱數',
+      label: 'Data requests',
       borderColor: '#356dd3',
       backgroundColor: '#356dd3',
       data: dataCDC,
@@ -46,7 +46,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '新增確診數（本土）',
+      label: 'New local cases',
       borderColor: '#d95040',
       backgroundColor: '#d95040',
       data: dataEnv,
@@ -56,7 +56,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '總送驗數',
+      label: 'PCR tests',
       borderColor: '#f2bd42',
       backgroundColor: '#f2bd42',
       data: dataEnv,
@@ -66,7 +66,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '零售店與休閒設施',
+      label: 'Retail & recreation',
       unit: '%',
       borderColor: '#f2bd42',
       borderDash: [1.25, 1.25],
@@ -78,9 +78,9 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '雜貨店和藥局',
+      label: 'Grocery & pharmacy',
       unit: '%',
-      borderColor: '#58a45c',
+      borderColor: '#bdbdbd',
       borderDash: [1.25, 1.25],
       borderWidth: 1.25,
       data: dataEnv,
@@ -90,7 +90,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '大眾運輸',
+      label: 'Public transport',
       unit: '%',
       borderColor: '#ee752f',
       borderDash: [1.25, 1.25],
@@ -102,7 +102,7 @@ export default [{
       }
     }, {
       type: 'line',
-      label: '工作場所',
+      label: 'Workplace',
       unit: '%',
       borderColor: '#68bbc4',
       borderDash: [1.25, 1.25],

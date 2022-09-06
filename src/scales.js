@@ -1,4 +1,4 @@
-import { zhTW } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
 
 const toAbbreviatedTick = (v) => {
   if (v >= 1000000)
@@ -16,7 +16,7 @@ export default {
     max: '2022-05-26',
     adapters: {
       date: {
-        locale: zhTW
+        locale: enUS
       }
     },
     time: {
@@ -36,7 +36,7 @@ export default {
     display: 'auto',
     title: {
       display: true,
-      text: '簡訊數量（則，M = 百萬）'
+      text: 'No. of SMS sent'
     },
     ticks: {
       callback: toAbbreviatedTick
@@ -47,7 +47,7 @@ export default {
     display: 'auto',
     title: {
       display: true,
-      text: '調閱數（筆，K = 千）'
+      text: 'No. of data requests'
     },
     ticks: {
       callback: toAbbreviatedTick
@@ -61,7 +61,7 @@ export default {
     display: 'auto',
     title: {
       display: true,
-      text: '確診人數（人）'
+      text: 'Local cases'
     },
     grid: {
       display: false
@@ -74,7 +74,7 @@ export default {
     display: 'auto',
     title: {
       display: true,
-      text: '送驗數（件，K = 千）'
+      text: 'No. of PCR tests'
     },
     grid: {
       display: false
@@ -90,7 +90,7 @@ export default {
     display: 'auto',
     title: {
       display: true,
-      text: '人流與全球疫情爆發前相較之增減（%）'
+      text: 'Mobility trend compared to pre-pandemic standards'
     },
     grid: {
       display: false

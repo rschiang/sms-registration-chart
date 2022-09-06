@@ -47,7 +47,7 @@ const chart = new Chart(ctx, {
       title: {
         display: true,
         align: 'start',
-        text: '1922 簡訊實聯制使用趨勢',
+        text: 'Usage trend of SMS-based Contact-Tracing System (SMS-CTS)',
         color: '#757575',
         font: {
           size: 18,
@@ -62,7 +62,7 @@ const chart = new Chart(ctx, {
       subtitle: {
         display: true,
         align: 'start',
-        text: '資料來源：衛生福利部疾病管制署、國家通訊傳播委員會、Google 社區人流報告',
+        text: 'Data source: NCC on Facebook, CDC, Google COVID-19 Community Mobility Reports',
         color: '#999',
         font: {
           size: 14
@@ -157,7 +157,7 @@ konamiBind(document.body, () => {
   chart.options.maintainAspectRatio = false;
   chart.options.devicePixelRatio = 3;
   chart.options.plugins.legend.labels.filter = ((li, data) => !li.hidden);
-  chart.resize(1280, 800);
+  chart.resize(1080, 720);
   document.getElementById('snapshotButton').removeAttribute('hidden');
 })
 

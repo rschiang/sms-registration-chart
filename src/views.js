@@ -2,10 +2,10 @@ import dataNCC from '../data/ncc.json';
 
 export default {
   ncc: {
-    datasets: ['ns', 'nd', 'cl', 'mr', 'mg', 'mt', 'mw'],
+    datasets: ['ns', 'nd', 'cl', 'mr', 'mg', 'mw'],
     embolden: ['ns', 'nd'],
     start: [2021, 5, 19],
-    end: [2022, 1, 22],
+    end: [2022, 4, 27],
     maxCase: 1000,
     onEnter: (chart) => chart.data.datasets[1].data = dataNCC.DELETED.slice(0, 7),
     onLeave: (chart) => chart.data.datasets[1].data = dataNCC.DELETED,
@@ -14,8 +14,8 @@ export default {
     datasets: ['cd', 'cl', 'mr', 'mg', 'mw'],
     embolden: ['cd'],
     start: [2021, 10, 20],
-    end: [2022, 3, 19],
-    maxCase: 300,
+    end: [2022, 4, 27],
+    maxCase: 1000,
   },
   compare: {
     datasets: ['ns', 'cd', 'mr', 'mg', 'mt', 'mw'],
