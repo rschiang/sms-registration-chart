@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>1922 簡訊實聯制使用趨勢圖表</title>
-	<link rel="stylesheet" href="assets/index.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usage trend chart of SMS-based Contact-Tracing System (SMS-CTS)</title>
+    <link rel="stylesheet" href="assets/index.css">
 </head>
+
 <body>
-	<main>
-		<canvas id="chart" width="1200" height="800"></canvas>
-	</main>
-	<footer>
-		<nav>
-			<button data-view-id="ncc">圖一：疫情與人流 (NCC)</button>
-			<button data-view-id="compare">圖二：資料來源比較</button>
-			<button data-view-id="cdc">圖三：疫情與人流 (1922)</button>
-			<button data-view-id="req">圖四：調閱數變化</button>
-			<button data-view-id="newNorm">圖五：新台灣模式</button>
-			<button data-view-id="default">顯示所有資料</button>
-			<button id="snapshotButton" hidden><a id="snapshot"></a>儲存截圖</button>
-		</nav>
-		<div>
-			© 2022 Poren Chiang, Shun-ling Chen, Cathy Lee, Yi-Ying Chao. <a href="https://infolaw.iias.sinica.edu.tw/?tag=%e7%b0%a1%e8%a8%8a%e5%af%a6%e8%81%af%e5%88%b6" rel="external help">Article Series</a> | <a href="https://github.com/rschiang/sms-registration-chart" rel="external source">Source Code</a> | <a href="https://github.com/IIAS-infolaw/sms-registration-data" rel="external data">Raw Data</a>
-		</div>
-	</footer>
-	<script src="app.js"></script>
+    <main>
+        <canvas id="chart" width="1200" height="800"></canvas>
+    </main>
+    <footer>
+        <nav>
+            <button data-view-id="ncc">Graph 1: NCC Data</button>
+            <button data-view-id="compare">Data Comparison</button>
+            <button data-view-id="cdc">1922 Data</button>
+            <button data-view-id="req">Graph 2: Data Requests</button>
+            <button data-view-id="newNorm">Graph 3: New Norm</button>
+            <button data-view-id="default">Show All Data</button>
+            <button id="snapshotButton" hidden><a id="snapshot"></a>Screenshot</button>
+        </nav>
+        <div>
+            © 2022 Poren Chiang, Shun-ling Chen, Cathy Lee, Yi-Ying Chao. <a
+                href="https://infolaw.iias.sinica.edu.tw/?tag=%e7%b0%a1%e8%a8%8a%e5%af%a6%e8%81%af%e5%88%b6"
+                rel="external help">Article Series</a> | <a href="https://github.com/rschiang/sms-registration-chart"
+                rel="external source">Source Code</a> | <a href="https://github.com/IIAS-infolaw/sms-registration-data"
+                rel="external data">Raw Data</a>
+        </div>
+    </footer>
+    <script src="app.js"></script>
 </body>
+
 </html>
